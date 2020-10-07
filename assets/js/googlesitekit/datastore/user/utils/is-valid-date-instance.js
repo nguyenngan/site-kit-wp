@@ -1,5 +1,5 @@
 /**
- * Feature flags configuration.
+ * core/user isValidDateInstance utility.
  *
  * Site Kit by Google, Copyright 2020 Google LLC
  *
@@ -16,16 +16,15 @@
  * limitations under the License.
  */
 
-exports.featureFlags = {
-	widgets: {
-		dashboard: {
-			enabled: 'development',
-		},
-		pageDashboard: {
-			enabled: 'development',
-		},
-		userInput: {
-			enabled: 'development',
-		},
-	},
+/**
+ * Asserts whether a given date instance is valid or invalid.
+ *
+ * @since n.e.x.t
+ *
+ * @param {Date} date Date instance to be asserted against.
+ * @return {boolean}  True if the given date instance is valid.
+ */
+export const isValidDateInstance = ( date ) => {
+	// type coercion provided by isNaN is preferred here over Number.isNaN
+	return date instanceof Date && ! isNaN( date );
 };

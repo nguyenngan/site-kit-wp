@@ -1,5 +1,5 @@
 /**
- * Feature flags configuration.
+ * core/user isValidDateRange utility.
  *
  * Site Kit by Google, Copyright 2020 Google LLC
  *
@@ -16,16 +16,19 @@
  * limitations under the License.
  */
 
-exports.featureFlags = {
-	widgets: {
-		dashboard: {
-			enabled: 'development',
-		},
-		pageDashboard: {
-			enabled: 'development',
-		},
-		userInput: {
-			enabled: 'development',
-		},
-	},
+/**
+ * Asserts whether a given dateRange string is valid or invalid.
+ *
+ * @since n.e.x.t
+ *
+ * @param {string} dateRange  Date string to be asserted against. Defaults to an empty string.
+ * @return {boolean}          True if the given dateRange string is valid.
+ */
+export const isValidDateRange = ( dateRange = '' ) => {
+	const parts = dateRange.split( '-' );
+
+	return parts.length === 3 &&
+		parts[ 0 ] === 'last' &&
+		! Number.isNaN( parts[ 1 ] ) && ! Number.isNaN( parseFloat( parts[ 1 ] ) ) &&
+		parts[ 2 ] === 'days';
 };

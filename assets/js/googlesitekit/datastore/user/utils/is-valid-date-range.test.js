@@ -1,5 +1,5 @@
 /**
- * Feature flags configuration.
+ * core/user isValidDateRange utility tests.
  *
  * Site Kit by Google, Copyright 2020 Google LLC
  *
@@ -16,16 +16,23 @@
  * limitations under the License.
  */
 
-exports.featureFlags = {
-	widgets: {
-		dashboard: {
-			enabled: 'development',
-		},
-		pageDashboard: {
-			enabled: 'development',
-		},
-		userInput: {
-			enabled: 'development',
-		},
-	},
-};
+/**
+ * Internal dependencies
+ */
+import { isValidDateRange } from './is-valid-date-range';
+
+describe( 'isValidDateString', () => {
+	// [ dateRange, expectedReturnValue ]
+	const valuesToTest = [
+		[ 'last-1-days', true ],
+		[ 'last-7-days', true ],
+		[ 'last-28-days', true ],
+		[ 'last-1-day', false ],
+		[ 'invalid-range', false ],
+		[ 'invalid-date-range', false ],
+	];
+
+	it.each( valuesToTest )( 'with date range of %s should return %s', ( dateRange, expected ) => {
+		expect( isValidDateRange( dateRange ) ).toEqual( expected );
+	} );
+} );
